@@ -14,6 +14,9 @@ import logger from 'morgan'                   //para registrar cada una de las p
 import indexRouter from './routes/index.js'   //este enrutador va a llamar a TODOS los otros recuersos (cities,itineraries,users)
 import notFoundHandler from './middlewares/notFoundHandler.js'
 import errorHandler from './middlewares/errorHandler.js'
+import cors from 'cors'
+
+
 let app = express();                          //ejecutando el módulo de express: CREO UNA APP DE BACKEND (SERVIDOR)
 
 // VIEW ENGINE SETUP
@@ -27,13 +30,14 @@ app.use(logger('dev'));                                   //obligo al servidor a
 app.use(express.json());                                  //obligo al servidor a manipular/leer json
 app.use(express.urlencoded({ extended: false }));         //obligo al servidor a leer params/queries
 //app.use(cookieParser());
+app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')));  //obligo al servidor a acceder a los archivos estáticos de la capreta public
 
 // ROUTER
 app.use('/api', indexRouter);                                //obligo al servidor a que use las rutas del enrutador principal con "/api"
 
 // catch 404 and forward to error handler
-app.use(notFoundHandler);
+app.use(errorHandler);
 
 // error handler
 app.use(notFoundHandler);
