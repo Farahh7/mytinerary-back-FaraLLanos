@@ -1,8 +1,9 @@
 import 'dotenv/config';
 import { connect } from 'mongoose';
 import City from '../City.js';
+import Itinerary from '../Itinerary.js';
 import User from '../User.js';
-import Itinerary from '../Itinerary.js'; // Import your Itinerary model
+// Import your Itinerary model
 
 const itineraries = [{
     name: 'Angkor Wats Temple Complex',
@@ -142,12 +143,12 @@ const itineraries = [{
 
 async function createItineraries(arrayItineraries) {
     try {
-        await connect(process.env.LINK_DB);
-        for (let itinerary of arrayItineraries) {
-            let city = await City.findOne({ city:itinerary.city_id }) 
-            let city_id = await city._id                           //SOLO necesito el id de ese usuario
-            itinerary.city_id = city_id  
-            await Itinerary.create(itinerary); // Use your Itinerary model here
+        await connect(process.env.LINK_DB)
+        for (let itineraries of arrayItineraries) {
+            let city = await City.findOne({ city:itineraries.city_id }) 
+            let city_id = await city._id
+            itineraries.city_id = city_id                
+            await Itinerary.create(itineraries)
         }
         console.log('done!');
     } catch (error) {
@@ -155,4 +156,4 @@ async function createItineraries(arrayItineraries) {
     }
 }
 
-createItineraries(itineraries);
+createItineraries(itineraries)
