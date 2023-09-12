@@ -16,5 +16,6 @@ let schema = new Schema({
 })
 
 let Itinerary = model(collection,schema)
+
 export default Itinerary
 
