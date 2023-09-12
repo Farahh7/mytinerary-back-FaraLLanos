@@ -2,24 +2,22 @@ import Activity from '../../models/Activity.js'
 
 export default async (req, res, next) => {
     try {
-        let allActivities = await Activity
-            .find({}, 'name photo itinerary_id')
-            .populate('itinerary_id', 'name price photo')
-        if (allActivities.length > 0) {
-            return res.status(200).json({
-                succes: true,
-                message: 'activities found',
-                response: allActivities
-            })
-        } else {
-            return res.status(404).json({
-                succes: false,
-                message: 'not found',
-                response: null
-            })
+        let queries = {}
+        if (req.query.itinerary_id) {
+            queries.itinerary_id = req.query.itinerary_id
         }
-        
+        let allActivities = await Activity.find(queries)
+            .populate({
+                path: "itinerary_id",
+                select: "_id name photo"
+            })
+
+        return res.status(200).json({
+            success: true,
+            message: "Activities found!",
+            response: allActivities,
+        });
     } catch (error) {
         next(error)
     }
-}
+};
