@@ -2,6 +2,7 @@ import Activity from '../../models/Activity.js'
 
 export default async (req, res, next) => {
     try {
+
         let queries = {}
         if (req.query.itinerary_id) {
             queries.itinerary_id = req.query.itinerary_id
@@ -21,3 +22,4 @@ export default async (req, res, next) => {
         next(error)
     }
 };
+

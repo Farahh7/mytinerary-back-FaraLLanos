@@ -6,7 +6,9 @@ export default async (req,res,next) =>{
         return res.status(201).json({
             success:true,
             massage: 'user created',
+
             response: one
+
         })
     } catch (error) {
         next(error)
