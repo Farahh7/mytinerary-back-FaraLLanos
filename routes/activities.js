@@ -10,9 +10,7 @@ import destroy from '../controllers/activities/destroy.js'
 let router = express.Router()
 
 //CREATE
-
 router.post('/', create)
-
 
 //READ
 router.get('/', read)

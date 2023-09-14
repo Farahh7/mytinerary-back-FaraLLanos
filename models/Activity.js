@@ -14,5 +14,6 @@ let schema = new Schema({
 
 let Activity = model(collection, schema)
 
+
 export default Activity
 
