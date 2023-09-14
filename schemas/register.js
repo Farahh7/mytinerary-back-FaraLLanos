@@ -36,6 +36,8 @@ let registerSchema = joi.object({
         'any.required': "country is required",
         "string.empty": "country is required",
     }),
-    
+    photo: joi.string().uri().empty("").messages({
+        "string.uri": "INVALID_URL",
+      }),
 })
 export default registerSchema
